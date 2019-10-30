@@ -33,15 +33,15 @@ export class Inventory extends Component {
             {this.props.inventory.map(item => (
               <tr key={item.id}>
                 <td>
-                  <a
+                  <button
                     onClick={this.props.deleteItem.bind(this, item.id)}
                     className="btn btn-sm btn-danger"
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                  </a>
-                  <a>
+                  </button>
+                  <button>
                     <FontAwesomeIcon icon={faEdit} />
-                  </a>
+                  </button>
                 </td>
                 <td>{item.name}</td>
                 <td>{item.count}</td>

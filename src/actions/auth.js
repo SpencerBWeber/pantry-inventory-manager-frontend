@@ -1,5 +1,4 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
 
 import {
   USER_LOADED,
@@ -26,7 +25,6 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      console.log(err);
       dispatch({
         type: AUTH_ERROR
       });
@@ -98,7 +96,7 @@ export const logout = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      return err;
+      console.log(err);
     });
 };
 

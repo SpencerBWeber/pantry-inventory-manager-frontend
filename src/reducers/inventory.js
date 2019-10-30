@@ -3,7 +3,7 @@ import {
   DELETE_ITEM,
   ADD_ITEM,
   CLEAR_ITEMS
-} from "../actions/types.js";
+} from "../actions/types";
 
 const initialState = {
   inventory: []
