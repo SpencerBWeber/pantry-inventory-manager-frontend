@@ -8,6 +8,7 @@ class Recipes extends Component {
   constructor() {
     super();
     this.state = {
+      ingredients: "",
       recipes: []
     };
   }
@@ -32,7 +33,7 @@ class Recipes extends Component {
         }
       )
       .then(res => {
-        // this.setState({ recipes: res.data });
+        this.setState({ recipes: res.data });
       })
       .catch(err => {
         console.log("get recipe error", err);
