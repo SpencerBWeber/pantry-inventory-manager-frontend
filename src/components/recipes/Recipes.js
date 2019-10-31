@@ -21,23 +21,32 @@ class Recipes extends Component {
   componentDidMount() {
     let API_KEY = `${process.env.REACT_APP_API_KEY}`;
     this.props.getInventory();
-    console.log(this.state);
-    axios
-      .get(
-        `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${this.state.ingredients}&number=20`,
-        {
-          params: {
-            apiKey: API_KEY,
-            "Content-Type": "application/json"
-          }
-        }
-      )
-      .then(res => {
-        this.setState({ recipes: res.data });
-      })
-      .catch(err => {
-        console.log("get recipe error", err);
+    setTimeout(() => {
+      this.props.inventory.map(item => {
+        this.setState({
+          ingredients: this.state.ingredients.concat(item.name, ",")
+        });
       });
+    }, 50);
+
+    setTimeout(() => {
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${this.state.ingredients}&number=20`,
+          {
+            params: {
+              apiKey: API_KEY,
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .then(res => {
+          this.setState({ recipes: res.data });
+        })
+        .catch(err => {
+          console.log("get recipe error", err);
+        });
+    }, 50);
   }
 
   renderRecipes = () => {
@@ -47,13 +56,9 @@ class Recipes extends Component {
           <h1>{recipe.title}</h1>
           <img src={recipe.image} alt="recipe-img" />
           <ul className="missed">
+            <h4>You're missing:</h4>
             {recipe.missedIngredients.map(direction => (
               <li key={direction.id}>{direction.original}</li>
-            ))}
-          </ul>
-          <ul className="used">
-            {recipe.usedIngredients.map(used => (
-              <li key={used.id}>{used.original}</li>
             ))}
           </ul>
         </div>
@@ -62,29 +67,6 @@ class Recipes extends Component {
   };
 
   render() {
-    // return (
-    //   <div>
-    //     <table className="table table-striped table-hover">
-    //       <thead>
-    //         <tr>
-    //           <th />
-    //           <th>Name</th>
-    //           <th>Count</th>
-    //         </tr>
-    //       </thead>
-
-    //       <tbody>
-    //         {this.props.inventory.map(item => (
-    //           <tr key={item.id}>
-    //             <td>{this.state.ingredients}</td>
-    //             <td>{item.name}</td>
-    //             <td>{item.count}</td>
-    //           </tr>
-    //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // );
     return <div>{this.renderRecipes()}</div>;
   }
 }

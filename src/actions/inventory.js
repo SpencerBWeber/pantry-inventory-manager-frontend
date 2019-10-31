@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createMessage, returnErrors } from "./messages";
 import { tokenConfig } from "./auth";
-
 import { GET_INVENTORY, DELETE_ITEM, ADD_ITEM } from "./types";
 
 // GET ITEMS

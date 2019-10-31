@@ -29,7 +29,6 @@ class Form extends Component {
   };
 
   render() {
-    const { name, count } = this.state;
     return (
       <div className="card card-body mt-4 mb-4">
         <h2>Add Pantry Item</h2>
@@ -41,7 +40,7 @@ class Form extends Component {
               type="text"
               name="name"
               onChange={this.onChange}
-              value={name}
+              value={this.state.name}
             />
           </div>
           <div className="form-group">
@@ -51,12 +50,12 @@ class Form extends Component {
               type="text"
               name="count"
               onChange={this.onChange}
-              value={count}
+              value={this.state.count}
             />
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn=primary">
-              Submit
+              Save
             </button>
           </div>
         </form>

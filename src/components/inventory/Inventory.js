@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getInventory, deleteItem } from "../../actions/inventory";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export class Inventory extends Component {
   static propTypes = {
@@ -38,9 +38,6 @@ export class Inventory extends Component {
                     className="btn btn-sm btn-danger"
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                  <button>
-                    <FontAwesomeIcon icon={faEdit} />
                   </button>
                 </td>
                 <td>{item.name}</td>
