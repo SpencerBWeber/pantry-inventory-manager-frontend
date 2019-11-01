@@ -60,7 +60,7 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarToggler">
             <a className="navbar-brand" href="/">
-              Inventory Manager
+              Pantry Keeper
             </a>
             {isAuthenticated ? (
               <ul className="navbar-nav mt-lg-0">
