@@ -53,7 +53,7 @@ class Recipes extends Component {
     if (this.state.recipes.length < 1) {
       setTimeout(() => {
         this.setState({ isEmpty: true });
-      }, 5000);
+      }, 8000);
     }
   }
 
