@@ -10,7 +10,8 @@ class Recipes extends Component {
     super();
     this.state = {
       ingredients: "",
-      recipes: []
+      recipes: [],
+      isEmpty: false
     };
   }
 
@@ -48,6 +49,12 @@ class Recipes extends Component {
           console.log("get recipe error", err);
         });
     }, 1000);
+
+    if (this.state.recipes.length < 1) {
+      setTimeout(() => {
+        this.setState({ isEmpty: true });
+      }, 5000);
+    }
   }
 
   renderRecipes = () => {
@@ -79,17 +86,32 @@ class Recipes extends Component {
     });
   };
 
+  renderLoading = () => {
+    return (
+      <div className="d-inline-flex p-2">
+        <h1 className="pl-2">
+          Hmm.. Looks like you need to add items to your pantry...
+        </h1>
+      </div>
+    );
+  };
+
   render() {
     return (
       <div className="row" id="top">
         {this.state.recipes.length < 1 ? (
-          <div className="d-inline-flex p-2">
-            <h1 className="pl-2">
-              Loading<Dot>.</Dot>
-              <Dot>.</Dot>
-              <Dot>.</Dot>
-            </h1>
-          </div>
+          this.state.isEmpty ? (
+            this.renderLoading()
+          ) : (
+            <div className="d-inline-flex p-2">
+              <h1 className="pl-2">
+                Loading
+                <Dot>.</Dot>
+                <Dot>.</Dot>
+                <Dot>.</Dot>
+              </h1>
+            </div>
+          )
         ) : (
           this.renderRecipes()
         )}
