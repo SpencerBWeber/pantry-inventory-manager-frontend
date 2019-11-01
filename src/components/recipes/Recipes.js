@@ -48,7 +48,7 @@ class Recipes extends Component {
         .catch(err => {
           console.log("get recipe error", err);
         });
-    }, 1000);
+    }, 2000);
 
     if (this.state.recipes.length < 1) {
       setTimeout(() => {
