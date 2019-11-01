@@ -29,7 +29,7 @@ class Recipes extends Component {
           ingredients: this.state.ingredients.concat(item.name, ",")
         });
       });
-    }, 1000);
+    }, 2000);
 
     setTimeout(() => {
       axios
