@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { getInventory } from "../../actions/inventory";
 import PropTypes from "prop-types";
+import { Dot } from "react-animated-dots";
 
 class Recipes extends Component {
   constructor() {
@@ -27,12 +28,12 @@ class Recipes extends Component {
           ingredients: this.state.ingredients.concat(item.name, ",")
         });
       });
-    }, 50);
+    }, 1000);
 
     setTimeout(() => {
       axios
         .get(
-          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${this.state.ingredients}&number=20`,
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${this.state.ingredients}&number=99`,
           {
             params: {
               apiKey: API_KEY,
@@ -46,28 +47,54 @@ class Recipes extends Component {
         .catch(err => {
           console.log("get recipe error", err);
         });
-    }, 50);
+    }, 1000);
   }
 
   renderRecipes = () => {
     return this.state.recipes.map(recipe => {
       return (
-        <div key={recipe.id}>
-          <h1>{recipe.title}</h1>
-          <img src={recipe.image} alt="recipe-img" />
-          <ul className="missed">
-            <h4>You're missing:</h4>
-            {recipe.missedIngredients.map(direction => (
-              <li key={direction.id}>{direction.original}</li>
-            ))}
-          </ul>
+        <div
+          key={recipe.id}
+          className="card border-light mb-3"
+          style={{ maxWidth: "22rem" }}
+        >
+          <div className="card-header">{recipe.title}</div>
+          <div className="card-body">
+            <img
+              src={recipe.image}
+              alt="recipe-img"
+              style={{ maxWidth: "22rem" }}
+            />
+            <ul className="missed">
+              <h4 className="card-title">You're missing:</h4>
+              {recipe.missedIngredients.map(direction => (
+                <li key={direction.id} className="card-text">
+                  {direction.original}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
     });
   };
 
   render() {
-    return <div>{this.renderRecipes()}</div>;
+    return (
+      <div className="row" id="top">
+        {this.state.recipes.length < 1 ? (
+          <div className="d-inline-flex p-2">
+            <h1 className="pl-2">
+              Loading<Dot>.</Dot>
+              <Dot>.</Dot>
+              <Dot>.</Dot>
+            </h1>
+          </div>
+        ) : (
+          this.renderRecipes()
+        )}
+      </div>
+    );
   }
 }
 

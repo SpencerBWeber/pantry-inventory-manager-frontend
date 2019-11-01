@@ -1,3 +1,5 @@
+import "bootswatch/dist/cosmo/bootstrap.min.css";
+
 import React, { Component, Fragment } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -16,8 +18,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
-
-import "./styles/bootstrap.min.css";
+import { footer } from "@jingledjango/devcamp-js-footer";
 
 const alertOptions = {
   timeout: 3000,
@@ -45,6 +46,9 @@ class App extends Component {
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                 </Switch>
+              </div>
+              <div className="navbar navbar-default navbar-fixed-bottom">
+                <div className="container">{footer("Spencer Weber")}</div>
               </div>
             </Fragment>
           </Router>

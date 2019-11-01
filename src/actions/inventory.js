@@ -6,7 +6,10 @@ import { GET_INVENTORY, DELETE_ITEM, ADD_ITEM } from "./types";
 // GET ITEMS
 export const getInventory = () => (dispatch, getState) => {
   axios
-    .get("http://localhost:8000/api/inventory/", tokenConfig(getState))
+    .get(
+      "https://pantry-keeper-backend.herokuapp.com/api/inventory/",
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch({
         type: GET_INVENTORY,
@@ -21,7 +24,10 @@ export const getInventory = () => (dispatch, getState) => {
 // DELETE ITEMS
 export const deleteItem = id => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/inventory/${id}/`, tokenConfig(getState))
+    .delete(
+      `https://pantry-keeper-backend.herokuapp.com/api/inventory/${id}/`,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ deleteItem: "Item Deleted" }));
       dispatch({
@@ -37,7 +43,11 @@ export const deleteItem = id => (dispatch, getState) => {
 // ADD ITEM
 export const addItem = item => (dispatch, getState) => {
   axios
-    .post("http://localhost:8000/api/inventory/", item, tokenConfig(getState))
+    .post(
+      "https://pantry-keeper-backend.herokuapp.com/api/inventory/",
+      item,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch(createMessage({ addItem: "Item added" }));
       dispatch({
